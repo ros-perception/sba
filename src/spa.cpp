@@ -52,6 +52,7 @@
 #include <stdio.h>
 #include "sparse_bundle_adjustment/sba.h"
 #include <Eigen/Cholesky>
+#include <utility>
 
 using namespace Eigen;
 using namespace std;
@@ -221,6 +222,8 @@ namespace sba
 
   // set up Jacobians
   // see Konolige RSS 2010 submission for details
+
+  const double ConP2::qScale = 1.0;
 
   void ConP2::setJacobians(std::vector<Node,Eigen::aligned_allocator<Node> > &nodes)
   {

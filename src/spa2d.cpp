@@ -87,6 +87,8 @@ namespace sba
 
   // set up Jacobians
 
+  const double Con2dP2::qScale = 1.0;
+
   void Con2dP2::setJacobians(std::vector<Node2d,Eigen::aligned_allocator<Node2d> > &nodes)
   {
     // node references

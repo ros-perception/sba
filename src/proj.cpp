@@ -2,6 +2,8 @@
 
 namespace sba
 {
+  const double Proj::qScale = 1.0;
+
   Proj::Proj(int ci, Eigen::Vector3d &q, bool stereo)
       : ndi(ci), kp(q), stereo(stereo), 
         isValid(true), useCovar(false), pointPlane(false) {}
