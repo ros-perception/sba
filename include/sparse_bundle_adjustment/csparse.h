@@ -52,14 +52,14 @@
 
 // CSparse header
 extern "C" {
-#include "suitesparse/cs.h"
+#include "cs.h"
 }
 #include <vector>
 #include <map>
 
 // Cholmod header, other header files brought in
 #ifdef SBA_CHOLMOD
-#include "suitesparse/cholmod.h"
+#include "cholmod.h"
 #endif
 
 // these are for SparseLib and IML, testing the Delayed State Filter
@@ -93,7 +93,7 @@ namespace sba
     vector< Matrix<double,6,6>, aligned_allocator<Matrix<double,6,6> > > diag;
     // compressed column storage of blocks
     vector< map<int,Matrix<double,6,6>, less<int>, 
-                aligned_allocator<Matrix<double,6,6> > > > cols;
+                aligned_allocator<std::pair<const int, Matrix<double,6,6>> > > > cols;
 
     void setupBlockStructure(int n); // size of rows/cols of A (in blocks)
     
@@ -158,7 +158,7 @@ namespace sba
     vector< Matrix<double,3,3>, aligned_allocator<Matrix<double,3,3> > > diag;
     // compressed column storage of blocks
     vector< map<int,Matrix<double,3,3>, less<int>, 
-                aligned_allocator<Matrix<double,3,3> > > > cols;
+                aligned_allocator<std::pair<const int, Matrix<double,3,3>> > > > cols;
 
     void setupBlockStructure(int n, bool eraseit = true); // size of rows/cols of A (in blocks)
     

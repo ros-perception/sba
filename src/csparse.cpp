@@ -109,11 +109,11 @@ namespace sba
     for (int i=0; i<(int)cols.size(); i++)
       {
         map<int,Matrix<double,6,6>, less<int>, 
-          aligned_allocator<Matrix<double,6,6> > > &col = cols[i];
+          aligned_allocator<std::pair<const int, Matrix<double,6,6>> > > &col = cols[i];
         if (col.size() > 0)
           {
             map<int,Matrix<double,6,6>, less<int>, 
-              aligned_allocator<Matrix<double,6,6> > >::iterator it;
+              aligned_allocator<std::pair<const int, Matrix<double,6,6>> > >::iterator it;
             for (it = col.begin(); it != col.end(); it++)
               it->second.setZero();
           }
@@ -131,10 +131,10 @@ namespace sba
   {
     // get column 
     map<int,Matrix<double,6,6>, less<int>, 
-      aligned_allocator<Matrix<double,6,6> > > &col = cols[jj];
+      aligned_allocator<std::pair<const int, Matrix<double,6,6>> > > &col = cols[jj];
     // find current matrix
     map<int,Matrix<double,6,6>, less<int>, 
-      aligned_allocator<Matrix<double,6,6> > >::iterator it;
+      aligned_allocator<std::pair<const int, Matrix<double,6,6>> > >::iterator it;
     it = col.find(ii);
     if (it == col.end())        // didn't find it
       col.insert(pair<int,Matrix<double,6,6> >(ii,m));
@@ -164,7 +164,7 @@ namespace sba
         for (int i=0; i<(int)cols.size(); i++)
           {
             map<int,Matrix<double,6,6>, less<int>, 
-              aligned_allocator<Matrix<double,6,6> > > &col = cols[i];
+              aligned_allocator<std::pair<const int, Matrix<double,6,6>> > > &col = cols[i];
             nnz += 36 * col.size(); // 6x6 matrix
           }
 
@@ -202,7 +202,7 @@ namespace sba
           {
             // column i entries
             map<int,Matrix<double,6,6>, less<int>, 
-              aligned_allocator<Matrix<double,6,6> > > &col = cols[i];
+              aligned_allocator<std::pair<const int, Matrix<double,6,6>> > > &col = cols[i];
 
             // do this for 6 columns
             for (int k=0; k<6; k++)
@@ -215,7 +215,7 @@ namespace sba
                   {
                     // map iterator
                     map<int,Matrix<double,6,6>, less<int>, 
-                      aligned_allocator<Matrix<double,6,6> > >::iterator it;
+                      aligned_allocator<std::pair<const int, Matrix<double,6,6>> > >::iterator it;
 
                     // iterate over block column entries
                     for (it = col.begin(); it != col.end(); it++)
@@ -250,7 +250,7 @@ namespace sba
        {
          // column i entries
          map<int,Matrix<double,6,6>, less<int>, 
-           aligned_allocator<Matrix<double,6,6> > > &col = cols[i];
+           aligned_allocator<std::pair<const int, Matrix<double,6,6>> > > &col = cols[i];
 
          // do this for 6 columns
          for (int k=0; k<6; k++)
@@ -260,7 +260,7 @@ namespace sba
                {
                  // map iterator
                  map<int,Matrix<double,6,6>, less<int>, 
-                   aligned_allocator<Matrix<double,6,6> > >::iterator it;
+                   aligned_allocator<std::pair<const int, Matrix<double,6,6>> > >::iterator it;
 
                  // iterate over block column entries
                  for (it = col.begin(); it != col.end(); it++)
@@ -432,7 +432,7 @@ namespace sba
 	  for (int i=0; i<(int)cols.size(); i++)
 	    {
 	      map<int,Matrix<double,3,3>, less<int>, 
-		aligned_allocator< Matrix <double,3,3> > > &col = cols[i];
+		aligned_allocator< std::pair<const int, Matrix <double,3,3>> > > &col = cols[i];
               col.clear();
             }
         asize = n;
@@ -448,11 +448,11 @@ namespace sba
 	for (int i=0; i<(int)cols.size(); i++)
 	  {
 	    map<int,Matrix<double,3,3>, less<int>, 
-	      aligned_allocator<Matrix<double,3,3> > > &col = cols[i];
+	      aligned_allocator<std::pair<const int, Matrix<double,3,3>> > > &col = cols[i];
             if (col.size() > 0)
 	      {
 		map<int,Matrix<double,3,3>, less<int>, 
-		  aligned_allocator<Matrix<double,3,3> > >::iterator it;
+		  aligned_allocator<std::pair<const int, Matrix<double,3,3>> > >::iterator it;
                 for (it = col.begin(); it != col.end(); it++)
 		  it->second.setZero();
               }
@@ -473,10 +473,10 @@ namespace sba
   {
     // get column 
     map<int,Matrix<double,3,3>, less<int>, 
-      aligned_allocator<Matrix<double,3,3> > > &col = cols[jj];
+      aligned_allocator<std::pair<const int, Matrix<double,3,3>> > > &col = cols[jj];
     // find current matrix
     map<int,Matrix<double,3,3>, less<int>, 
-      aligned_allocator<Matrix<double,3,3> > >::iterator it;
+      aligned_allocator<std::pair<const int, Matrix<double,3,3>> > >::iterator it;
     it = col.find(ii);
     if (it == col.end())        // didn't find it
       col.insert(pair<int,Matrix<double,3,3> >(ii,m));
@@ -517,7 +517,7 @@ namespace sba
         for (int i=0; i<(int)cols.size(); i++)
           {
             map<int,Matrix<double,3,3>, less<int>, 
-              aligned_allocator<Matrix<double,3,3> > > &col = cols[i];
+              aligned_allocator<std::pair<const int, Matrix<double,3,3>> > > &col = cols[i];
             nnz += 9 * col.size(); // 3x3 matrix
           }
 #ifdef SBA_CHOLMOD
@@ -554,7 +554,7 @@ namespace sba
           {
             // column i entries
             map<int,Matrix<double,3,3>, less<int>, 
-              aligned_allocator<Matrix<double,3,3> > > &col = cols[i];
+              aligned_allocator<std::pair<const int, Matrix<double,3,3>> > > &col = cols[i];
 
             // do this for 3 columns
             for (int k=0; k<3; k++)
@@ -567,7 +567,7 @@ namespace sba
                   {
                     // map iterator
                     map<int,Matrix<double,3,3>, less<int>, 
-                      aligned_allocator<Matrix<double,3,3> > >::iterator it;
+                      aligned_allocator<std::pair<const int, Matrix<double,3,3>> > >::iterator it;
 
                     // iterate over block column entries
                     for (it = col.begin(); it != col.end(); it++)
@@ -601,7 +601,7 @@ namespace sba
        {
          // column i entries
          map<int,Matrix<double,3,3>, less<int>, 
-           aligned_allocator<Matrix<double,3,3> > > &col = cols[i];
+           aligned_allocator<std::pair<const int, Matrix<double,3,3>> > > &col = cols[i];
 
          // do this for 3 columns
          for (int k=0; k<3; k++)
@@ -611,7 +611,7 @@ namespace sba
                {
                  // map iterator
                  map<int,Matrix<double,3,3>, less<int>, 
-                   aligned_allocator<Matrix<double,3,3> > >::iterator it;
+                   aligned_allocator<std::pair<const int, Matrix<double,3,3>> > >::iterator it;
 
                  // iterate over block column entries
                  for (it = col.begin(); it != col.end(); it++)

@@ -49,7 +49,7 @@ namespace sba
   
   /// Obnoxiously long type def for the map type that holds the point 
   /// projections in tracks.
-  typedef std::map<const int, Proj, std::less<int>, Eigen::aligned_allocator<Proj> > ProjMap;
+  typedef std::map<const int, Proj, std::less<int>, Eigen::aligned_allocator<std::pair<const int, Proj>> > ProjMap;
 
   /// \brief Proj holds a projection measurement of a point onto a
   /// frame. They are a repository for the link between the frame and
@@ -73,6 +73,8 @@ namespace sba
       /// \brief Default constructor. Initializes to default values, 
       /// kp = <0 0 0> and ndi = <0>. Also sets the projection to be invalid.
       Proj();
+
+      //Proj & operator=(const Proj&) = delete;
       
       /// Node index, the camera node for this projection.
       int ndi;
@@ -87,7 +89,7 @@ namespace sba
       bool stereo;
       
       /// Calculates re-projection error and stores it in #err.
-     double calcErr(const Node &nd, const Point &pt, double huber = 0.0);
+      double calcErr(const Node &nd, const Point &pt, double huber = 0.0);
       
       /// \brief Get the correct squared norm of the error, depending on 
       /// whether the projection is monocular or stereo.
@@ -187,6 +189,8 @@ namespace sba
       
       /// Default constructor for Track.
       Track();
+
+      //Track & operator=(const Track&) = delete;
       
       /// \brief A map of all the projections of the point with camera index 
       /// as key, based off an STL map.
