@@ -68,7 +68,7 @@ namespace sba
       jacobiBPCG() { residual = 0.0; };
       int doBPCG(int iters, double tol,
                  vector< Matrix<double,N,N>, aligned_allocator<Matrix<double,N,N> > > &diag,
-                 vector< map<int,Matrix<double,N,N>, less<int>, aligned_allocator<Matrix<double,N,N> > > > &cols,
+                 vector< map<int,Matrix<double,N,N>, less<int>, aligned_allocator<std::pair<const int, Matrix<double,N,N>> > > > &cols,
                  VectorXd &x,
                  VectorXd &b,
                  bool abstol = false,
@@ -78,7 +78,7 @@ namespace sba
       // uses internal linear storage for Hessian
       int doBPCG2(int iters, double tol,
                  vector< Matrix<double,N,N>, aligned_allocator<Matrix<double,N,N> > > &diag,
-                 vector< map<int,Matrix<double,N,N>, less<int>, aligned_allocator<Matrix<double,N,N> > > > &cols,
+                 vector< map<int,Matrix<double,N,N>, less<int>, aligned_allocator<std::pair<const int, Matrix<double,N,N>> > > > &cols,
                  VectorXd &x,
                  VectorXd &b,
                  bool abstol = false,
@@ -88,8 +88,8 @@ namespace sba
       double residual;
 
     private:
-      void mMV(vector< Matrix<double,N,N>, aligned_allocator<Matrix<double,N,N> > > &diag,
-               vector< map<int,Matrix<double,N,N>, less<int>, aligned_allocator<Matrix<double,N,N> > > > &cols,
+      void mMV(vector< Matrix<double,N,N>, aligned_allocator< Matrix<double,N,N> > > &diag,
+               vector< map<int,Matrix<double,N,N>, less<int>, aligned_allocator<std::pair<const int, Matrix<double,N,N>> > > > &cols,
                const VectorXd &vin,
                VectorXd &vout);
  
@@ -98,7 +98,7 @@ namespace sba
                 const VectorXd &vin,
                 VectorXd &vout);
  
-      void mD(vector< Matrix<double,N,N>, aligned_allocator<Matrix<double,N,N> > > &diag,
+      void mD(vector< Matrix<double,N,N>, aligned_allocator< Matrix<double,N,N> > > &diag,
               VectorXd &vin,
               VectorXd &vout);
 
@@ -108,7 +108,7 @@ namespace sba
 
   template <int N>
     void jacobiBPCG<N>::mMV(vector< Matrix<double,N,N>, aligned_allocator<Matrix<double,N,N> > > &diag,
-                        vector< map<int,Matrix<double,N,N>, less<int>, aligned_allocator<Matrix<double,N,N> > > > &cols,
+                        vector< map<int,Matrix<double,N,N>, less<int>, aligned_allocator<std::pair<const int, Matrix<double,N,N>> > > > &cols,
                         const VectorXd &vin,
                         VectorXd &vout)
     {
@@ -119,11 +119,11 @@ namespace sba
             vout.segment<N>(i*N) = diag[i]*vin.segment<N>(i*N); // only works with cols ordering
 
             map<int,Matrix<double,N,N>, less<int>, 
-              aligned_allocator<Matrix<double,N,N> > > &col = cols[i];
+              aligned_allocator<std::pair<const int, Matrix<double,N,N>> > > &col = cols[i];
             if (col.size() > 0)
               {
                 typename map<int,Matrix<double,N,N>, less<int>, // need "typename" here, barf
-                  aligned_allocator<Matrix<double,N,N > > >::iterator it;
+                  aligned_allocator<std::pair<const int, Matrix<double,N,N >> > >::iterator it;
                 for (it = col.begin(); it != col.end(); it++)
                   {
                     int ri = (*it).first; // get row index
@@ -177,7 +177,7 @@ namespace sba
   template <int N>
     int jacobiBPCG<N>::doBPCG(int iters, double tol,
 	    vector< Matrix<double,N,N>, aligned_allocator<Matrix<double,N,N> > > &diag,
-	    vector< map<int,Matrix<double,N,N>, less<int>, aligned_allocator<Matrix<double,N,N> > > > &cols,
+	    vector< map<int,Matrix<double,N,N>, less<int>, aligned_allocator<std::pair<const int, Matrix<double,N,N>> > > > &cols,
 	    VectorXd &x,
 	    VectorXd &b,
 	    bool abstol,
@@ -237,7 +237,7 @@ namespace sba
   template <int N>
     int jacobiBPCG<N>::doBPCG2(int iters, double tol,
 	    vector< Matrix<double,N,N>, aligned_allocator<Matrix<double,N,N> > > &diag,
-	    vector< map<int,Matrix<double,N,N>, less<int>, aligned_allocator<Matrix<double,N,N> > > > &cols,
+	    vector< map<int,Matrix<double,N,N>, less<int>, aligned_allocator<std::pair<const int, Matrix<double,N,N>> > > > &cols,
 	    VectorXd &x,
 	    VectorXd &b,
 	    bool abstol,
@@ -260,11 +260,11 @@ namespace sba
       for (int i=0; i<(int)cols.size(); i++)
         {
           map<int,Matrix<double,N,N>, less<int>, 
-            aligned_allocator<Matrix<double,N,N> > > &col = cols[i];
+            aligned_allocator<std::pair<const int, Matrix<double,N,N>> > > &col = cols[i];
           if (col.size() > 0)
             {
               typename map<int,Matrix<double,N,N>, less<int>, 
-                aligned_allocator<Matrix<double,N,N> > >::iterator it;
+                aligned_allocator<std::pair<const int, Matrix<double,N,N>> > >::iterator it;
               for (it = col.begin(); it != col.end(); it++)
                 {
                   int ri = (*it).first; // get row index
