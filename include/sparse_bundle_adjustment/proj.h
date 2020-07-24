@@ -49,7 +49,7 @@ namespace sba
   
   /// Obnoxiously long type def for the map type that holds the point 
   /// projections in tracks.
-  typedef std::map<int, Proj> ProjMap; //, std::less<int>, Eigen::aligned_allocator<std::pair<int, Proj>> 
+  typedef std::map<int, Proj> ProjMap;
 
   /// \brief Proj holds a projection measurement of a point onto a
   /// frame. They are a repository for the link between the frame and
