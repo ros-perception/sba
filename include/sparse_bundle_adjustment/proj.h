@@ -73,8 +73,6 @@ namespace sba
       /// \brief Default constructor. Initializes to default values, 
       /// kp = <0 0 0> and ndi = <0>. Also sets the projection to be invalid.
       Proj();
-
-      //Proj & operator=(const Proj&) = delete;
       
       /// Node index, the camera node for this projection.
       int ndi;
@@ -189,8 +187,6 @@ namespace sba
       
       /// Default constructor for Track.
       Track();
-
-      //Track & operator=(const Track&) = delete;
       
       /// \brief A map of all the projections of the point with camera index 
       /// as key, based off an STL map.

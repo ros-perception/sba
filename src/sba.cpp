@@ -119,9 +119,7 @@ namespace sba
         return true;
       return false;
     }
-    tracks[pi].projections.insert( pair<const int, Proj>(ci, Proj(ci, q, stereo)) ); 
-
-    //tracks[pi].projections[ci] = Proj(ci, q, stereo);
+    tracks[pi].projections[ci] = Proj(ci, q, stereo);
 
 #if 0
     /// NOTE
@@ -148,8 +146,7 @@ namespace sba
         return true;
       return false;
     }
-    tracks[pi].projections.insert( pair<const int, Proj>(ci, Proj(ci, q)) ); 
-    //tracks[pi].projections[ci] = Proj(ci, q);
+    tracks[pi].projections[ci] = Proj(ci, q);
     return true;
   }
   
@@ -164,8 +161,7 @@ namespace sba
         return true;
       return false;
     }
-    tracks[pi].projections.insert( pair<const int, Proj>(ci, Proj(ci, q, true)) ); 
-    //tracks[pi].projections[ci] = Proj(ci, q, true);
+    tracks[pi].projections[ci] = Proj(ci, q, true);
 
 #if 0
     /// NOTE
@@ -1628,8 +1624,7 @@ void SysSBA::setupSys(double sLambda)
                 int ci = prj.ndi;
                 
                 // Insert the projection into the original track
-                //tr0[ci] = prj;
-                tr0.insert( pair<const int, Proj>(ci, prj) ); 
+                tr0[ci] = prj;
               }
             tr1.clear();
           }
